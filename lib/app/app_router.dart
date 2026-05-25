@@ -14,7 +14,7 @@ import 'app_shell.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
-    initialLocation: '/splash',
+    initialLocation: '/',
     debugLogDiagnostics: false,
     routes: [
       // Окремі екрани (без нижньої навігації)
