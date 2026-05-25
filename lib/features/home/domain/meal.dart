@@ -41,7 +41,7 @@ class Meal {
       name: json['strMeal'] ?? '',
       category: json['strCategory'] ?? '',
       area: json['strArea'] ?? '',
-      instructions: json['strInstructions'] ?? '',
+      instructions: (json['strInstructions'] ?? '').replaceAll('\r\n', '\n').replaceAll('\r', '\n').trim(),
       thumbnail: json['strMealThumb'] ?? '',
       tags: json['strTags'] ?? '',
       youtubeUrl: json['strYoutube'] ?? '',
