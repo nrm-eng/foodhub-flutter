@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/add_recipe/presentation/screens/add_recipe_screen.dart';
+import '../features/auth/presentation/auth_providers.dart';
 import '../features/auth/presentation/screens/login_screen.dart';
 import '../features/auth/presentation/screens/register_screen.dart';
 import '../features/auth/presentation/screens/splash_screen.dart';
@@ -13,11 +14,26 @@ import '../features/profile/presentation/screens/settings_screen.dart';
 import 'app_shell.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
+  final authState = ref.watch(authStateProvider);
+
   return GoRouter(
-    initialLocation: '/',
+    initialLocation: '/splash',
     debugLogDiagnostics: false,
+    redirect: (context, state) {
+      final isLoggedIn = authState.valueOrNull != null;
+      final isLoading = authState.isLoading;
+      final loc = state.matchedLocation;
+
+      const authRoutes = {'/login', '/register'};
+      final isAuthRoute = authRoutes.contains(loc);
+      final isSplash = loc == '/splash';
+
+      if (isLoading) return isSplash ? null : '/splash';
+      if (!isLoggedIn && !isAuthRoute && !isSplash) return '/login';
+      if (isLoggedIn && (isAuthRoute || isSplash)) return '/';
+      return null;
+    },
     routes: [
-      // Окремі екрани (без нижньої навігації)
       GoRoute(
         path: '/splash',
         builder: (context, state) => const SplashScreen(),
@@ -40,8 +56,6 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         path: '/settings',
         builder: (context, state) => const SettingsScreen(),
       ),
-
-      // Головні екрани (з нижньою навігацією — AppShell)
       ShellRoute(
         builder: (context, state, child) {
           final loc = state.matchedLocation;
