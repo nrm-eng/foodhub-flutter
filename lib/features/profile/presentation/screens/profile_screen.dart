@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../../auth/presentation/auth_providers.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -11,10 +12,11 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = FirebaseAuth.instance.currentUser;
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: Text(l10n.profile),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),
@@ -42,7 +44,7 @@ class ProfileScreen extends ConsumerWidget {
             const Spacer(),
             OutlinedButton(
               onPressed: () => context.go('/settings'),
-              child: const Text('Settings'),
+              child: Text(l10n.settings),
             ),
             const SizedBox(height: 12),
             ElevatedButton(
@@ -54,7 +56,7 @@ class ProfileScreen extends ConsumerWidget {
                 backgroundColor: Theme.of(context).colorScheme.error,
                 foregroundColor: Colors.white,
               ),
-              child: const Text('Sign Out'),
+              child: Text(l10n.signOut),
             ),
             const SizedBox(height: 24),
           ],

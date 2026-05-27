@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../auth_providers.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -44,6 +45,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -53,14 +56,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             children: [
               const Spacer(),
               Text(
-                'Welcome back',
+                l10n.welcomeBack,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
               ),
               const SizedBox(height: 8),
               Text(
-                'Sign in to continue',
+                l10n.signInToContinue,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: Theme.of(context)
                           .colorScheme
@@ -72,18 +75,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  hintText: 'Email',
-                  prefixIcon: Icon(Icons.email_outlined),
+                decoration: InputDecoration(
+                  hintText: l10n.email,
+                  prefixIcon: const Icon(Icons.email_outlined),
                 ),
               ),
               const SizedBox(height: 12),
               TextField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: const InputDecoration(
-                  hintText: 'Password',
-                  prefixIcon: Icon(Icons.lock_outlined),
+                decoration: InputDecoration(
+                  hintText: l10n.password,
+                  prefixIcon: const Icon(Icons.lock_outlined),
                 ),
               ),
               if (_error != null) ...[
@@ -108,13 +111,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           color: Colors.white,
                         ),
                       )
-                    : const Text('Sign In'),
+                    : Text(l10n.signIn),
               ),
               const SizedBox(height: 16),
               Center(
                 child: TextButton(
                   onPressed: () => context.go('/register'),
-                  child: const Text('Don\'t have an account? Register'),
+                  child: Text(l10n.noAccount),
                 ),
               ),
               const Spacer(),

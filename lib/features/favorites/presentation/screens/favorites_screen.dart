@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../favorites_providers.dart';
 
 class FavoritesScreen extends ConsumerStatefulWidget {
@@ -32,6 +33,7 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen>
   @override
   Widget build(BuildContext context) {
     final userId = FirebaseAuth.instance.currentUser?.uid;
+    final l10n = AppLocalizations.of(context);
 
     if (userId == null) {
       return const Scaffold(
@@ -41,7 +43,7 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Collection'),
+        title: Text(l10n.myCollection),
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Theme.of(context).colorScheme.primary,
@@ -50,9 +52,9 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen>
               .colorScheme
               .onSurface
               .withValues(alpha: 0.5),
-          tabs: const [
-            Tab(text: 'Favorites'),
-            Tab(text: 'My Recipes'),
+          tabs: [
+            Tab(text: l10n.favorites),
+            Tab(text: l10n.myRecipes),
           ],
         ),
       ),
@@ -74,6 +76,8 @@ class _FavoritesTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('users')
@@ -95,8 +99,8 @@ class _FavoritesTab extends ConsumerWidget {
         if (docs.isEmpty) {
           return _EmptyState(
             icon: Icons.favorite_border,
-            title: 'No favorites yet',
-            subtitle: 'Tap the heart icon on any recipe to save it',
+            title: l10n.noFavoritesYet,
+            subtitle: l10n.noFavoritesSubtitle,
           );
         }
 
@@ -141,6 +145,8 @@ class _MyRecipesTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('users')
@@ -162,8 +168,8 @@ class _MyRecipesTab extends StatelessWidget {
         if (docs.isEmpty) {
           return _EmptyState(
             icon: Icons.menu_book_outlined,
-            title: 'No recipes yet',
-            subtitle: 'Add your own recipes using the + tab',
+            title: l10n.noRecipesYet,
+            subtitle: l10n.noRecipesSubtitle,
           );
         }
 
@@ -261,8 +267,7 @@ class _RecipeCard extends StatelessWidget {
                 width: double.infinity,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) => Container(
-                  color:
-                      Theme.of(context).colorScheme.surfaceContainerHighest,
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   child: const Icon(Icons.restaurant, size: 40),
                 ),
               ),

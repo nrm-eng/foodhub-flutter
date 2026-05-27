@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../auth_providers.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
@@ -44,6 +45,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -53,14 +56,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             children: [
               const Spacer(),
               Text(
-                'Create account',
+                l10n.createAccount,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
               ),
               const SizedBox(height: 8),
               Text(
-                'Join FoodHub today',
+                l10n.joinFoodHub,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: Theme.of(context)
                           .colorScheme
@@ -72,18 +75,18 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  hintText: 'Email',
-                  prefixIcon: Icon(Icons.email_outlined),
+                decoration: InputDecoration(
+                  hintText: l10n.email,
+                  prefixIcon: const Icon(Icons.email_outlined),
                 ),
               ),
               const SizedBox(height: 12),
               TextField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: const InputDecoration(
-                  hintText: 'Password (min 6 characters)',
-                  prefixIcon: Icon(Icons.lock_outlined),
+                decoration: InputDecoration(
+                  hintText: l10n.passwordHint,
+                  prefixIcon: const Icon(Icons.lock_outlined),
                 ),
               ),
               if (_error != null) ...[
@@ -108,13 +111,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           color: Colors.white,
                         ),
                       )
-                    : const Text('Create Account'),
+                    : Text(l10n.createAccount),
               ),
               const SizedBox(height: 16),
               Center(
                 child: TextButton(
                   onPressed: () => context.go('/login'),
-                  child: const Text('Already have an account? Sign In'),
+                  child: Text(l10n.alreadyHaveAccount),
                 ),
               ),
               const Spacer(),

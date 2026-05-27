@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../home_providers.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -12,6 +13,7 @@ class HomeScreen extends ConsumerWidget {
     final categoriesAsync = ref.watch(categoriesProvider);
     final selectedCategory = ref.watch(selectedCategoryProvider);
     final mealsAsync = ref.watch(mealsByCategoryProvider(selectedCategory));
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       body: SafeArea(
@@ -24,14 +26,14 @@ class HomeScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Find Your Recipe 🍳',
+                      l10n.findYourRecipe,
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.w700,
                           ),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'What do you want to cook today?',
+                      l10n.whatToCook,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Theme.of(context)
                                 .colorScheme
@@ -43,7 +45,7 @@ class HomeScreen extends ConsumerWidget {
                     _SearchBar(),
                     const SizedBox(height: 24),
                     Text(
-                      'Categories',
+                      l10n.categories,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w700,
                           ),
@@ -52,7 +54,6 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
             ),
-
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 110,
@@ -81,7 +82,6 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
             ),
-
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
@@ -93,7 +93,6 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
             ),
-
             mealsAsync.when(
               loading: () => const SliverFillRemaining(
                 child: Center(child: CircularProgressIndicator()),
@@ -128,6 +127,8 @@ class HomeScreen extends ConsumerWidget {
 class _SearchBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+
     return TextField(
       onChanged: (value) =>
           ref.read(searchQueryProvider.notifier).state = value,
@@ -136,10 +137,10 @@ class _SearchBar extends ConsumerWidget {
           context.push('/search?q=$value');
         }
       },
-      decoration: const InputDecoration(
-        hintText: 'Search recipes...',
-        prefixIcon: Icon(Icons.search),
-        suffixIcon: Icon(Icons.tune),
+      decoration: InputDecoration(
+        hintText: l10n.searchRecipes,
+        prefixIcon: const Icon(Icons.search),
+        suffixIcon: const Icon(Icons.tune),
       ),
     );
   }

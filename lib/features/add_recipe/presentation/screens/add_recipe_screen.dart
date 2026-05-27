@@ -1,10 +1,13 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../../../l10n/app_localizations.dart';
 
 class AddRecipeScreen extends ConsumerStatefulWidget {
   const AddRecipeScreen({super.key});
@@ -31,8 +34,8 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
   }
 
   Future<void> _pickImage(ImageSource source) async {
-  final picker = ImagePicker();
-  final image = await picker.pickImage(source: source, imageQuality: 80);
+    final picker = ImagePicker();
+    final image = await picker.pickImage(source: source, imageQuality: 80);
     if (image != null) {
       final bytes = await image.readAsBytes();
       setState(() {
@@ -43,6 +46,7 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
   }
 
   void _showImageSourceDialog() {
+    final l10n = AppLocalizations.of(context);
     showModalBottomSheet(
       context: context,
       builder: (context) => SafeArea(
@@ -51,7 +55,7 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
           children: [
             ListTile(
               leading: const Icon(Icons.camera_alt_outlined),
-              title: const Text('Take a photo'),
+              title: Text(l10n.takePhoto),
               onTap: () {
                 Navigator.pop(context);
                 _pickImage(ImageSource.camera);
@@ -59,7 +63,7 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.photo_library_outlined),
-              title: const Text('Choose from gallery'),
+              title: Text(l10n.chooseFromGallery),
               onTap: () {
                 Navigator.pop(context);
                 _pickImage(ImageSource.gallery);
@@ -73,6 +77,7 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
 
   Future<void> _saveRecipe() async {
     if (!_formKey.currentState!.validate()) return;
+    final l10n = AppLocalizations.of(context);
 
     setState(() => _isLoading = true);
 
@@ -94,12 +99,15 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Recipe saved successfully!')),
+          SnackBar(content: Text(l10n.recipeSaved)),
         );
         _nameController.clear();
         _instructionsController.clear();
         _ingredientsController.clear();
-        setState(() => _pickedImage = null);
+        setState(() {
+          _pickedImage = null;
+          _imageBytes = null;
+        });
       }
     } catch (e) {
       if (mounted) {
@@ -114,9 +122,11 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Recipe'),
+        title: Text(l10n.addRecipe),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -125,7 +135,6 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Фото
               GestureDetector(
                 onTap: _showImageSourceDialog,
                 child: Container(
@@ -169,7 +178,7 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Add photo',
+                              l10n.addPhoto,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium
@@ -185,13 +194,11 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-
-              // Назва
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(
-                  hintText: 'Recipe name',
-                  prefixIcon: Icon(Icons.restaurant_outlined),
+                decoration: InputDecoration(
+                  hintText: l10n.recipeName,
+                  prefixIcon: const Icon(Icons.restaurant_outlined),
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -204,14 +211,12 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
                 },
               ),
               const SizedBox(height: 12),
-
-              // Інгредієнти
               TextFormField(
                 controller: _ingredientsController,
                 maxLines: 3,
-                decoration: const InputDecoration(
-                  hintText: 'Ingredients (one per line)',
-                  prefixIcon: Icon(Icons.list_outlined),
+                decoration: InputDecoration(
+                  hintText: l10n.ingredientsHint,
+                  prefixIcon: const Icon(Icons.list_outlined),
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -221,14 +226,12 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
                 },
               ),
               const SizedBox(height: 12),
-
-              // Інструкція
               TextFormField(
                 controller: _instructionsController,
                 maxLines: 5,
-                decoration: const InputDecoration(
-                  hintText: 'Cooking instructions',
-                  prefixIcon: Icon(Icons.menu_book_outlined),
+                decoration: InputDecoration(
+                  hintText: l10n.cookingInstructions,
+                  prefixIcon: const Icon(Icons.menu_book_outlined),
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -241,7 +244,6 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
                 },
               ),
               const SizedBox(height: 24),
-
               ElevatedButton(
                 onPressed: _isLoading ? null : _saveRecipe,
                 child: _isLoading
@@ -253,7 +255,7 @@ class _AddRecipeScreenState extends ConsumerState<AddRecipeScreen> {
                           color: Colors.white,
                         ),
                       )
-                    : const Text('Save Recipe'),
+                    : Text(l10n.saveRecipe),
               ),
             ],
           ),
