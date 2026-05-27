@@ -165,7 +165,8 @@ class _CategoryChip extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
         margin: const EdgeInsets.only(right: 12),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
@@ -204,7 +205,7 @@ class _CategoryChip extends StatelessWidget {
 }
 
 class _MealCard extends StatelessWidget {
-  const _MealCard({required this.meal});
+  const _MealCard({super.key, required this.meal});
 
   final dynamic meal;
 
@@ -226,17 +227,20 @@ class _MealCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20),
-                ),
-                child: Image.network(
-                  meal.thumbnail,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => Container(
-                    color: colorScheme.surfaceContainerHighest,
-                    child: const Icon(Icons.restaurant, size: 40),
+              child: Hero(
+                tag: 'meal-${meal.id}',
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(20),
+                  ),
+                  child: Image.network(
+                    meal.thumbnail,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      color: colorScheme.surfaceContainerHighest,
+                      child: const Icon(Icons.restaurant, size: 40),
+                    ),
                   ),
                 ),
               ),

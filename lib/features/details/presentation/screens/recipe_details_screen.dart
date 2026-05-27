@@ -53,14 +53,17 @@ class RecipeDetailsScreen extends ConsumerWidget {
                   ),
                 ],
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Image.network(
-                    meal.thumbnail,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .surfaceContainerHighest,
-                      child: const Icon(Icons.restaurant, size: 60),
+                  background: Hero(
+                    tag: 'meal-$mealId',
+                    child: Image.network(
+                      meal.thumbnail,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest,
+                        child: const Icon(Icons.restaurant, size: 60),
+                      ),
                     ),
                   ),
                 ),
