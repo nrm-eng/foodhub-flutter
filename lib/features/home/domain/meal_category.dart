@@ -19,4 +19,13 @@ class MealCategory {
       description: json['strCategoryDescription'] ?? '',
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'idCategory': id,
+      'strCategory': name,
+      'strCategoryThumb': thumbnail,
+      'strCategoryDescription': description,
+    };
+ }
 }

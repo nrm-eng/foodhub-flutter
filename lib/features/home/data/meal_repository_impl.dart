@@ -6,6 +6,8 @@ import '../domain/meal.dart';
 import '../domain/meal_category.dart';
 import '../domain/meal_preview.dart';
 import '../domain/meal_repository.dart';
+import 'dart:convert';
+import '../../../core/storage/local_cache.dart';
 
 class MealRepositoryImpl implements MealRepository {
   const MealRepositoryImpl({required this.client});
@@ -14,6 +16,16 @@ class MealRepositoryImpl implements MealRepository {
 
   @override
   Future<List<MealCategory>> getCategories() async {
+    // Спробуй взяти з кешу
+    final cached = await LocalCache.getCategories();
+    if (cached != null) {
+      final list = jsonDecode(cached) as List<dynamic>;
+      return list
+          .map((e) => MealCategory.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
+
+    // Якщо кешу немає — завантажуємо з API
     final response = await client.get(
       Uri.parse(ApiConstants.categories),
     );
@@ -24,6 +36,10 @@ class MealRepositoryImpl implements MealRepository {
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
     final list = json['categories'] as List<dynamic>;
+
+    // Зберігаємо в кеш
+    await LocalCache.saveCategories(jsonEncode(list));
+
     return list
         .map((e) => MealCategory.fromJson(e as Map<String, dynamic>))
         .toList();
