@@ -205,7 +205,7 @@ class _CategoryChip extends StatelessWidget {
 }
 
 class _MealCard extends StatelessWidget {
-  const _MealCard({super.key, required this.meal});
+  const _MealCard({required this.meal});
 
   final dynamic meal;
 
