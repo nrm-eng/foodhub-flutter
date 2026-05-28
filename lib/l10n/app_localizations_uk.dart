@@ -133,4 +133,19 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get whatToCook => 'Що хочеш приготувати сьогодні?';
+
+  @override
+  String get forgotPassword => 'Забули пароль';
+
+  @override
+  String get forgotPasswordSubtitle => 'Введіть email щоб скинути пароль';
+
+  @override
+  String get sendResetLink => 'Надіслати посилання';
+
+  @override
+  String get resetLinkSent => 'Посилання надіслано! Перевірте пошту.';
+
+  @override
+  String get backToLogin => 'Повернутись до входу';
 }

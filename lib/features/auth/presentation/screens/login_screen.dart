@@ -120,6 +120,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   child: Text(l10n.noAccount),
                 ),
               ),
+              Center(
+                child: TextButton(
+                  onPressed: () => context.go('/forgot-password'),
+                  child: Text(l10n.forgotPassword),
+                ),
+              ),
               const Spacer(),
             ],
           ),

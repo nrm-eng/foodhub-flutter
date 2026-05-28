@@ -41,5 +41,10 @@
   "system": "Systemowy",
   "language": "Język",
   "findYourRecipe": "Znajdź swój przepis",
-  "whatToCook": "Co chcesz dziś ugotować?"
+  "whatToCook": "Co chcesz dziś ugotować?",
+  "forgotPassword": "Zapomniałem hasła",
+  "forgotPasswordSubtitle": "Podaj email aby zresetować hasło",
+  "sendResetLink": "Wyślij link resetujący",
+  "resetLinkSent": "Link wysłany! Sprawdź email.",
+  "backToLogin": "Wróć do logowania"
 }

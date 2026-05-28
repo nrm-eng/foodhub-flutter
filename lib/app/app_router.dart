@@ -11,6 +11,7 @@ import '../features/favorites/presentation/screens/favorites_screen.dart';
 import '../features/home/presentation/screens/home_screen.dart';
 import '../features/profile/presentation/screens/profile_screen.dart';
 import '../features/profile/presentation/screens/settings_screen.dart';
+import '../features/auth/presentation/screens/forgot_password_screen.dart';
 import 'app_shell.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
@@ -24,7 +25,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       final isLoading = authState.isLoading;
       final loc = state.matchedLocation;
 
-      const authRoutes = {'/login', '/register'};
+      const authRoutes = {'/login', '/register', '/forgot-password'};
       final isAuthRoute = authRoutes.contains(loc);
       final isSplash = loc == '/splash';
 
@@ -45,6 +46,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/register',
         builder: (context, state) => const RegisterScreen(),
+      ),
+      GoRoute(
+        path: '/forgot-password',
+        builder: (context, state) => const ForgotPasswordScreen(),
       ),
       GoRoute(
         path: '/recipe/:id',

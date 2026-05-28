@@ -41,5 +41,10 @@
   "system": "Системна",
   "language": "Мова",
   "findYourRecipe": "Знайди свій рецепт",
-  "whatToCook": "Що хочеш приготувати сьогодні?"
+  "whatToCook": "Що хочеш приготувати сьогодні?",
+  "forgotPassword": "Забули пароль",
+  "forgotPasswordSubtitle": "Введіть email щоб скинути пароль",
+  "sendResetLink": "Надіслати посилання",
+  "resetLinkSent": "Посилання надіслано! Перевірте пошту.",
+  "backToLogin": "Повернутись до входу"
 }

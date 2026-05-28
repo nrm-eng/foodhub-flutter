@@ -41,5 +41,10 @@
   "system": "System",
   "language": "Language",
   "findYourRecipe": "Find Your Recipe",
-  "whatToCook": "What do you want to cook today?"
+  "whatToCook": "What do you want to cook today?",
+  "forgotPassword": "Forgot Password",
+  "forgotPasswordSubtitle": "Enter your email to reset your password",
+  "sendResetLink": "Send Reset Link",
+  "resetLinkSent": "Reset link sent! Check your email.",
+  "backToLogin": "Back to Login"
 }

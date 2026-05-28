@@ -351,6 +351,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'What do you want to cook today?'**
   String get whatToCook;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password'**
+  String get forgotPassword;
+
+  /// No description provided for @forgotPasswordSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email to reset your password'**
+  String get forgotPasswordSubtitle;
+
+  /// No description provided for @sendResetLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Reset Link'**
+  String get sendResetLink;
+
+  /// No description provided for @resetLinkSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset link sent! Check your email.'**
+  String get resetLinkSent;
+
+  /// No description provided for @backToLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Login'**
+  String get backToLogin;
 }
 
 class _AppLocalizationsDelegate

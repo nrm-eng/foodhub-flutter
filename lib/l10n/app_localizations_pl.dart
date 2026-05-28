@@ -133,4 +133,19 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get whatToCook => 'Co chcesz dziś ugotować?';
+
+  @override
+  String get forgotPassword => 'Zapomniałem hasła';
+
+  @override
+  String get forgotPasswordSubtitle => 'Podaj email aby zresetować hasło';
+
+  @override
+  String get sendResetLink => 'Wyślij link resetujący';
+
+  @override
+  String get resetLinkSent => 'Link wysłany! Sprawdź email.';
+
+  @override
+  String get backToLogin => 'Wróć do logowania';
 }

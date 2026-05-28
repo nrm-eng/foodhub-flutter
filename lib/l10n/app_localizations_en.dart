@@ -134,4 +134,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get whatToCook => 'What do you want to cook today?';
+
+  @override
+  String get forgotPassword => 'Forgot Password';
+
+  @override
+  String get forgotPasswordSubtitle =>
+      'Enter your email to reset your password';
+
+  @override
+  String get sendResetLink => 'Send Reset Link';
+
+  @override
+  String get resetLinkSent => 'Reset link sent! Check your email.';
+
+  @override
+  String get backToLogin => 'Back to Login';
 }
