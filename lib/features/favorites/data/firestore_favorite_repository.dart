@@ -13,8 +13,8 @@ class FirestoreFavoriteRepository implements FavoriteRepository {
   @override
   Stream<List<String>> watchFavoriteIds(String userId) {
     return _favoritesRef(userId).snapshots().map(
-          (snapshot) => snapshot.docs.map((doc) => doc.id).toList(),
-        );
+      (snapshot) => snapshot.docs.map((doc) => doc.id).toList(),
+    );
   }
 
   @override
