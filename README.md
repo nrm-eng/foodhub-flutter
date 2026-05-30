@@ -29,16 +29,7 @@ FoodHub — це рецептний додаток з підтримкою вл�
 
 ## Технічний стек
 
-| Категорія | Технологія |
-|---|---|
-| UI фреймворк | Flutter 3.24+, Material Design 3 |
-| State Management | Riverpod |
-| Навігація | GoRouter |
-| Backend | Firebase Auth, Firestore, Storage |
-| API | TheMealDB (REST) |
-| Локальне збереження | SharedPreferences |
-| Локалізація | Flutter Intl (ARB) |
-| Тестування | flutter_test, mocktail |
+Проект побудований на Flutter 3.24+ з Material Design 3. Стан додатку керується через Riverpod (StateNotifier, FutureProvider, StreamProvider). Навігація реалізована через GoRouter з захищеними маршрутами. Backend — Firebase Auth, Firestore та Storage. Дані рецептів завантажуються з TheMealDB REST API через Repository pattern. Налаштування зберігаються локально через SharedPreferences. Інтерфейс локалізований через Flutter Intl (ARB файли). Тестування — flutter_test та mocktail.
 
 ---
 
