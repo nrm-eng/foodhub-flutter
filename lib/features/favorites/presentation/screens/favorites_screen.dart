@@ -456,11 +456,7 @@ void _showEditSheet(
         ),
       ),
     ),
-  ).then((_) {
-    nameCtrl.dispose();
-    ingredientsCtrl.dispose();
-    instructionsCtrl.dispose();
-  });
+  );
 }
 
 // Повний градієнтний placeholder (для grid картки)
