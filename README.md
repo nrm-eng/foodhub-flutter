@@ -88,9 +88,7 @@ flutter analyze    # 0 issues
 
 ## Скріншоти
 
-<img width="576" height="1280" alt="photo_2026-05-30_10-03-22" src="https://github.com/user-attachments/assets/4293f382-b0ce-49ff-8321-70601c87b1cf" />
-
-
+<img width="200" alt="photo_2026-05-30_10-03-22" src="https://github.com/user-attachments/assets/4293f382-b0ce-49ff-8321-70601c87b1cf" />
 <img width="200" alt="photo_2026-05-30_10-03-05" src="https://github.com/user-attachments/assets/2755904a-311f-4494-96ec-0bc0ac2f2386" /> <img width="200" alt="photo_2026-05-30_10-03-24 (2)" src="https://github.com/user-attachments/assets/abffb6c9-864c-40d9-9b3f-b2a1e8d24d1b" /> <img width="200" alt="photo_2026-05-30_10-03-07" src="https://github.com/user-attachments/assets/a3e32feb-74a4-489b-9ab5-bcb08f5f6b6b" /> <img width="200" alt="photo_2026-05-30_10-03-09" src="https://github.com/user-attachments/assets/699971cb-d79a-4f84-a625-4e81fa978db2" /> <img width="200" alt="photo_2026-05-30_10-03-29" src="https://github.com/user-attachments/assets/4a432d7e-55b8-491d-935e-2330ade38e54" /> <img width="200" alt="photo_2026-05-30_10-03-16" src="https://github.com/user-attachments/assets/88e732b4-9062-4f45-b7e0-5a6c69d18a01" />
 
 
