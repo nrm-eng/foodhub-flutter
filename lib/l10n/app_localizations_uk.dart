@@ -18,6 +18,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get favorites => 'Вибране';
 
   @override
+  String get add => 'Додати';
+
+  @override
   String get addRecipe => 'Додати рецепт';
 
   @override
@@ -148,4 +151,58 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get backToLogin => 'Повернутись до входу';
+
+  @override
+  String get searchResults => 'Результати пошуку';
+
+  @override
+  String get noSearchResults => 'Рецептів не знайдено';
+
+  @override
+  String get recipeOfTheDay => 'Рецепт дня';
+
+  @override
+  String get recipeNameRequired => 'Введіть назву рецепту';
+
+  @override
+  String get recipeNameTooShort => 'Назва має бути мінімум 3 символи';
+
+  @override
+  String get ingredientsRequired => 'Введіть інгредієнти';
+
+  @override
+  String get instructionsRequired => 'Введіть інструкцію приготування';
+
+  @override
+  String get instructionsTooShort => 'Інструкція має бути мінімум 20 символів';
+
+  @override
+  String get errorSaving => 'Помилка збереження рецепту';
+
+  @override
+  String get addIngredient => 'Додати';
+
+  @override
+  String get atLeastOneIngredient => 'Додайте хоча б один інгредієнт';
+
+  @override
+  String get ingredientHint => 'Інгредієнт';
+
+  @override
+  String get emailRequired => 'Введіть вашу електронну пошту';
+
+  @override
+  String get emailInvalid => 'Введіть правильний email';
+
+  @override
+  String get passwordRequired => 'Введіть пароль';
+
+  @override
+  String get passwordTooShort => 'Пароль має бути мінімум 6 символів';
+
+  @override
+  String get confirmPassword => 'Підтвердіть пароль';
+
+  @override
+  String get passwordsDoNotMatch => 'Паролі не співпадають';
 }

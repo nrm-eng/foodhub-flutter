@@ -18,6 +18,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get favorites => 'Favorites';
 
   @override
+  String get add => 'Add';
+
+  @override
   String get addRecipe => 'Add Recipe';
 
   @override
@@ -150,4 +153,59 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get backToLogin => 'Back to Login';
+
+  @override
+  String get searchResults => 'Search Results';
+
+  @override
+  String get noSearchResults => 'No recipes found';
+
+  @override
+  String get recipeOfTheDay => 'Recipe of the Day';
+
+  @override
+  String get recipeNameRequired => 'Please enter a recipe name';
+
+  @override
+  String get recipeNameTooShort => 'Name must be at least 3 characters';
+
+  @override
+  String get ingredientsRequired => 'Please enter ingredients';
+
+  @override
+  String get instructionsRequired => 'Please enter cooking instructions';
+
+  @override
+  String get instructionsTooShort =>
+      'Instructions must be at least 20 characters';
+
+  @override
+  String get errorSaving => 'Error saving recipe';
+
+  @override
+  String get addIngredient => 'Add';
+
+  @override
+  String get atLeastOneIngredient => 'Add at least one ingredient';
+
+  @override
+  String get ingredientHint => 'Ingredient';
+
+  @override
+  String get emailRequired => 'Please enter your email';
+
+  @override
+  String get emailInvalid => 'Please enter a valid email';
+
+  @override
+  String get passwordRequired => 'Please enter your password';
+
+  @override
+  String get passwordTooShort => 'Password must be at least 6 characters';
+
+  @override
+  String get confirmPassword => 'Confirm password';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
 }

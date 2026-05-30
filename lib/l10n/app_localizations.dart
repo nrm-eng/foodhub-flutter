@@ -118,6 +118,12 @@ abstract class AppLocalizations {
   /// **'Favorites'**
   String get favorites;
 
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
   /// No description provided for @addRecipe.
   ///
   /// In en, this message translates to:
@@ -381,6 +387,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Back to Login'**
   String get backToLogin;
+
+  /// No description provided for @searchResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Results'**
+  String get searchResults;
+
+  /// No description provided for @noSearchResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No recipes found'**
+  String get noSearchResults;
+
+  /// No description provided for @recipeOfTheDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe of the Day'**
+  String get recipeOfTheDay;
+
+  /// No description provided for @recipeNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a recipe name'**
+  String get recipeNameRequired;
+
+  /// No description provided for @recipeNameTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must be at least 3 characters'**
+  String get recipeNameTooShort;
+
+  /// No description provided for @ingredientsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter ingredients'**
+  String get ingredientsRequired;
+
+  /// No description provided for @instructionsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter cooking instructions'**
+  String get instructionsRequired;
+
+  /// No description provided for @instructionsTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Instructions must be at least 20 characters'**
+  String get instructionsTooShort;
+
+  /// No description provided for @errorSaving.
+  ///
+  /// In en, this message translates to:
+  /// **'Error saving recipe'**
+  String get errorSaving;
+
+  /// No description provided for @addIngredient.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get addIngredient;
+
+  /// No description provided for @atLeastOneIngredient.
+  ///
+  /// In en, this message translates to:
+  /// **'Add at least one ingredient'**
+  String get atLeastOneIngredient;
+
+  /// No description provided for @ingredientHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Ingredient'**
+  String get ingredientHint;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email'**
+  String get emailRequired;
+
+  /// No description provided for @emailInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get emailInvalid;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your password'**
+  String get passwordRequired;
+
+  /// No description provided for @passwordTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get passwordTooShort;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get confirmPassword;
+
+  /// No description provided for @passwordsDoNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordsDoNotMatch;
 }
 
 class _AppLocalizationsDelegate

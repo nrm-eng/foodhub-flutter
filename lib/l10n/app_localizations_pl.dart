@@ -12,10 +12,13 @@ class AppLocalizationsPl extends AppLocalizations {
   String get appName => 'FoodHub';
 
   @override
-  String get home => 'Strona główna';
+  String get home => 'Główna';
 
   @override
   String get favorites => 'Ulubione';
+
+  @override
+  String get add => 'Dodaj';
 
   @override
   String get addRecipe => 'Dodaj przepis';
@@ -148,4 +151,59 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get backToLogin => 'Wróć do logowania';
+
+  @override
+  String get searchResults => 'Wyniki wyszukiwania';
+
+  @override
+  String get noSearchResults => 'Nie znaleziono przepisów';
+
+  @override
+  String get recipeOfTheDay => 'Przepis dnia';
+
+  @override
+  String get recipeNameRequired => 'Podaj nazwę przepisu';
+
+  @override
+  String get recipeNameTooShort => 'Nazwa musi mieć co najmniej 3 znaki';
+
+  @override
+  String get ingredientsRequired => 'Podaj składniki';
+
+  @override
+  String get instructionsRequired => 'Podaj instrukcję gotowania';
+
+  @override
+  String get instructionsTooShort =>
+      'Instrukcja musi mieć co najmniej 20 znaków';
+
+  @override
+  String get errorSaving => 'Błąd zapisywania przepisu';
+
+  @override
+  String get addIngredient => 'Dodaj';
+
+  @override
+  String get atLeastOneIngredient => 'Dodaj co najmniej jeden składnik';
+
+  @override
+  String get ingredientHint => 'Składnik';
+
+  @override
+  String get emailRequired => 'Podaj swój adres email';
+
+  @override
+  String get emailInvalid => 'Podaj poprawny adres email';
+
+  @override
+  String get passwordRequired => 'Podaj hasło';
+
+  @override
+  String get passwordTooShort => 'Hasło musi mieć co najmniej 6 znaków';
+
+  @override
+  String get confirmPassword => 'Potwierdź hasło';
+
+  @override
+  String get passwordsDoNotMatch => 'Hasła nie są zgodne';
 }
