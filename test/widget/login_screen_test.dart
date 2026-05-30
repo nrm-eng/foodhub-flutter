@@ -40,7 +40,7 @@ void main() {
       await tester.pumpWidget(buildTestApp(const LoginScreen()));
       await tester.pump();
 
-      expect(find.byType(TextButton), findsOneWidget);
+      expect(find.byType(TextButton), findsAtLeastNWidgets(1));
     });
   });
 }

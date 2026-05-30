@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:food_hub/features/home/data/meal_repository_impl.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
@@ -9,6 +10,7 @@ class FakeUri extends Fake implements Uri {}
 
 void main() {
   setUpAll(() {
+    TestWidgetsFlutterBinding.ensureInitialized();
     registerFallbackValue(FakeUri());
   });
 
@@ -16,6 +18,7 @@ void main() {
   late MealRepositoryImpl repository;
 
   setUp(() {
+    SharedPreferences.setMockInitialValues({});
     mockClient = MockHttpClient();
     repository = MealRepositoryImpl(client: mockClient);
   });
