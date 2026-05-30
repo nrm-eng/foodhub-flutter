@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../../favorites/presentation/favorites_providers.dart';
 import '../../../home/presentation/home_providers.dart';
 
@@ -16,40 +17,71 @@ class RecipeDetailsScreen extends ConsumerWidget {
     final favoriteIdsAsync = ref.watch(favoriteIdsProvider);
     final userId = FirebaseAuth.instance.currentUser?.uid;
 
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       body: mealAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('Error: $e')),
         data: (meal) {
-          final isFavorite = favoriteIdsAsync.valueOrNull?.contains(mealId) ?? false;
+          final isFavorite =
+              favoriteIdsAsync.valueOrNull?.contains(mealId) ?? false;
 
           return CustomScrollView(
             slivers: [
               SliverAppBar(
                 expandedHeight: 300,
                 pinned: true,
-                actions: [
-                  IconButton(
-                    icon: Icon(
-                      isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: isFavorite
-                          ? Theme.of(context).colorScheme.error
-                          : null,
+                backgroundColor: Colors.transparent,
+                // Стрілка назад з темним фоном — завжди видима
+                leading: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.4),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                        size: 22,
+                      ),
                     ),
-                    onPressed: () async {
-                      if (userId == null) return;
-                      final repo = ref.read(favoriteRepositoryProvider);
-                      if (isFavorite) {
-                        await repo.removeFavorite(userId, mealId);
-                      } else {
-                        await repo.addFavorite(
-                          userId,
-                          mealId,
-                          meal.name,
-                          meal.thumbnail,
-                        );
-                      }
-                    },
+                  ),
+                ),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: GestureDetector(
+                      onTap: () async {
+                        if (userId == null) return;
+                        final repo = ref.read(favoriteRepositoryProvider);
+                        if (isFavorite) {
+                          await repo.removeFavorite(userId, mealId);
+                        } else {
+                          await repo.addFavorite(
+                            userId,
+                            mealId,
+                            meal.name,
+                            meal.thumbnail,
+                          );
+                        }
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black.withValues(alpha: 0.4),
+                          shape: BoxShape.circle,
+                        ),
+                        padding: const EdgeInsets.all(8),
+                        child: Icon(
+                          isFavorite ? Icons.favorite : Icons.favorite_border,
+                          color: isFavorite ? Colors.red[300] : Colors.white,
+                          size: 22,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
                 flexibleSpace: FlexibleSpaceBar(
@@ -59,9 +91,9 @@ class RecipeDetailsScreen extends ConsumerWidget {
                       meal.thumbnail,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) => Container(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerHighest,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.surfaceContainerHighest,
                         child: const Icon(Icons.restaurant, size: 60),
                       ),
                     ),
@@ -76,31 +108,31 @@ class RecipeDetailsScreen extends ConsumerWidget {
                     children: [
                       Text(
                         meal.name,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall
+                        style: Theme.of(context).textTheme.headlineSmall
                             ?.copyWith(fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(height: 8),
                       Row(
                         children: [
                           _InfoChip(
-                            icon: Icons.category_outlined,
+                            icon: Icons.restaurant_rounded,
                             label: meal.category,
+                            bgColor: const Color(0xFFFFECB3),
+                            fgColor: const Color(0xFFE65100),
                           ),
                           const SizedBox(width: 8),
                           _InfoChip(
                             icon: Icons.public,
                             label: meal.area,
+                            bgColor: const Color(0xFFFFECB3),
+                            fgColor: const Color(0xFFBF360C),
                           ),
                         ],
                       ),
                       const SizedBox(height: 24),
                       Text(
-                        'Ingredients',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
+                        l10n.ingredients,
+                        style: Theme.of(context).textTheme.titleMedium
                             ?.copyWith(fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(height: 12),
@@ -113,26 +145,21 @@ class RecipeDetailsScreen extends ConsumerWidget {
                                 width: 8,
                                 height: 8,
                                 decoration: BoxDecoration(
-                                  color:
-                                      Theme.of(context).colorScheme.primary,
+                                  color: Theme.of(context).colorScheme.primary,
                                   shape: BoxShape.circle,
                                 ),
                               ),
                               const SizedBox(width: 12),
                               Text(
                                 meal.measures[index],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
+                                style: Theme.of(context).textTheme.bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
                                   meal.ingredients[index],
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium,
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                               ),
                             ],
@@ -141,19 +168,16 @@ class RecipeDetailsScreen extends ConsumerWidget {
                       }),
                       const SizedBox(height: 24),
                       Text(
-                        'Instructions',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
+                        l10n.instructions,
+                        style: Theme.of(context).textTheme.titleMedium
                             ?.copyWith(fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(height: 12),
                       Text(
                         meal.instructions,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(height: 1.6),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.copyWith(height: 1.6),
                       ),
                       const SizedBox(height: 40),
                     ],
@@ -169,34 +193,37 @@ class RecipeDetailsScreen extends ConsumerWidget {
 }
 
 class _InfoChip extends StatelessWidget {
-  const _InfoChip({required this.icon, required this.label});
+  const _InfoChip({
+    required this.icon,
+    required this.label,
+    required this.bgColor,
+    required this.fgColor,
+  });
 
   final IconData icon;
   final String label;
+  final Color bgColor;
+  final Color fgColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.15),
+        color: bgColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
-            size: 14,
-            color: Theme.of(context).colorScheme.primary,
-          ),
+          Icon(icon, size: 14, color: fgColor),
           const SizedBox(width: 4),
           Text(
             label,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.w600,
-                ),
+              color: fgColor,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ],
       ),
