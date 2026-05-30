@@ -23,11 +23,7 @@ class FoodHubApp extends ConsumerWidget {
       darkTheme: AppTheme.dark(),
       themeMode: themeMode,
       locale: locale,
-      supportedLocales: const [
-        Locale('en'),
-        Locale('uk'),
-        Locale('pl'),
-      ],
+      supportedLocales: const [Locale('en'), Locale('uk'), Locale('pl')],
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

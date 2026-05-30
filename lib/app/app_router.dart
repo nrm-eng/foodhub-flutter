@@ -10,8 +10,9 @@ import '../features/details/presentation/screens/recipe_details_screen.dart';
 import '../features/favorites/presentation/screens/favorites_screen.dart';
 import '../features/home/presentation/screens/home_screen.dart';
 import '../features/profile/presentation/screens/profile_screen.dart';
-import '../features/profile/presentation/screens/settings_screen.dart';
 import '../features/auth/presentation/screens/forgot_password_screen.dart';
+import '../features/search/presentation/screens/search_screen.dart';
+import '../features/home/presentation/screens/category_meals_screen.dart';
 import 'app_shell.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
@@ -39,10 +40,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         path: '/splash',
         builder: (context, state) => const SplashScreen(),
       ),
-      GoRoute(
-        path: '/login',
-        builder: (context, state) => const LoginScreen(),
-      ),
+      GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
       GoRoute(
         path: '/register',
         builder: (context, state) => const RegisterScreen(),
@@ -53,13 +51,22 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/recipe/:id',
-        builder: (context, state) => RecipeDetailsScreen(
-          mealId: state.pathParameters['id']!,
-        ),
+        builder: (context, state) =>
+            RecipeDetailsScreen(mealId: state.pathParameters['id']!),
       ),
       GoRoute(
-        path: '/settings',
-        builder: (context, state) => const SettingsScreen(),
+        path: '/search',
+        builder: (context, state) {
+          final query = state.uri.queryParameters['q'] ?? '';
+          return SearchScreen(initialQuery: query);
+        },
+      ),
+      GoRoute(
+        path: '/category/:name',
+        builder: (context, state) {
+          final name = Uri.decodeComponent(state.pathParameters['name']!);
+          return CategoryMealsScreen(category: name);
+        },
       ),
       ShellRoute(
         builder: (context, state, child) {
@@ -91,10 +98,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           );
         },
         routes: [
-          GoRoute(
-            path: '/',
-            builder: (context, state) => const HomeScreen(),
-          ),
+          GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
           GoRoute(
             path: '/favorites',
             builder: (context, state) => const FavoritesScreen(),
