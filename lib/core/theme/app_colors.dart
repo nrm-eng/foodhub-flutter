@@ -13,10 +13,10 @@ abstract final class AppColors {
   static const Color borderDark = Color(0xFF3A3A3A);
 
   // Light theme backgrounds
-  static const Color bgLight = Color(0xFFFFFDF5);
+  static const Color bgLight = Color(0xFFFFD54F);
   static const Color surfaceLight = Color(0xFFFFFFFF);
-  static const Color elevatedLight = Color(0xFFF5F5F0);
-  static const Color borderLight = Color(0xFFE8E8E0);
+  static const Color elevatedLight = Color(0xFFFFF8E1);
+  static const Color borderLight = Color(0xFFFFCA28);
 
   // Text — dark theme
   static const Color textPrimaryDark = Color(0xFFF5F5F5);
