@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../../../core/constants/api_constants.dart';
+import '../../../core/storage/local_cache.dart';
 import '../domain/meal.dart';
 import '../domain/meal_category.dart';
 import '../domain/meal_preview.dart';
@@ -14,9 +15,17 @@ class MealRepositoryImpl implements MealRepository {
 
   @override
   Future<List<MealCategory>> getCategories() async {
-    final response = await client.get(
-      Uri.parse(ApiConstants.categories),
-    );
+    // Спробуй взяти з кешу
+    final cached = await LocalCache.getCategories();
+    if (cached != null) {
+      final list = jsonDecode(cached) as List<dynamic>;
+      return list
+          .map((e) => MealCategory.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
+
+    // Якщо кешу немає — завантажуємо з API
+    final response = await client.get(Uri.parse(ApiConstants.categories));
 
     if (response.statusCode != 200) {
       throw Exception('Failed to load categories');
@@ -24,6 +33,10 @@ class MealRepositoryImpl implements MealRepository {
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
     final list = json['categories'] as List<dynamic>;
+
+    // Зберігаємо в кеш
+    await LocalCache.saveCategories(jsonEncode(list));
+
     return list
         .map((e) => MealCategory.fromJson(e as Map<String, dynamic>))
         .toList();
@@ -48,9 +61,7 @@ class MealRepositoryImpl implements MealRepository {
 
   @override
   Future<Meal> getMealById(String id) async {
-    final response = await client.get(
-      Uri.parse(ApiConstants.mealById(id)),
-    );
+    final response = await client.get(Uri.parse(ApiConstants.mealById(id)));
 
     if (response.statusCode != 200) {
       throw Exception('Failed to load meal');
@@ -77,5 +88,18 @@ class MealRepositoryImpl implements MealRepository {
     return (meals as List<dynamic>)
         .map((e) => MealPreview.fromJson(e as Map<String, dynamic>))
         .toList();
+  }
+
+  @override
+  Future<Meal> getRandomMeal() async {
+    final response = await client.get(Uri.parse(ApiConstants.randomMeal));
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to load random meal');
+    }
+
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    final list = json['meals'] as List<dynamic>;
+    return Meal.fromJson(list.first as Map<String, dynamic>);
   }
 }

@@ -16,9 +16,7 @@ final httpClientProvider = Provider<http.Client>((ref) {
 
 // Репозиторій
 final mealRepositoryProvider = Provider<MealRepository>((ref) {
-  return MealRepositoryImpl(
-    client: ref.watch(httpClientProvider),
-  );
+  return MealRepositoryImpl(client: ref.watch(httpClientProvider));
 });
 
 // Категорії
@@ -27,24 +25,28 @@ final categoriesProvider = FutureProvider<List<MealCategory>>((ref) {
 });
 
 // Рецепти за категорією
-final selectedCategoryProvider = StateProvider<String>((ref) => 'Beef');
-
 final mealsByCategoryProvider =
     FutureProvider.family<List<MealPreview>, String>((ref, category) {
-  return ref.watch(mealRepositoryProvider).getMealsByCategory(category);
-});
+      return ref.watch(mealRepositoryProvider).getMealsByCategory(category);
+    });
 
 // Деталі рецепту
-final mealDetailProvider =
-    FutureProvider.family<Meal, String>((ref, id) {
+final mealDetailProvider = FutureProvider.family<Meal, String>((ref, id) {
   return ref.watch(mealRepositoryProvider).getMealById(id);
 });
 
 // Пошук
 final searchQueryProvider = StateProvider<String>((ref) => '');
 
-final searchResultsProvider =
-    FutureProvider.family<List<MealPreview>, String>((ref, query) {
+final searchResultsProvider = FutureProvider.family<List<MealPreview>, String>((
+  ref,
+  query,
+) {
   if (query.isEmpty) return Future.value([]);
   return ref.watch(mealRepositoryProvider).searchMeals(query);
+});
+
+// Випадковий рецепт дня
+final randomMealProvider = FutureProvider<Meal>((ref) {
+  return ref.watch(mealRepositoryProvider).getRandomMeal();
 });

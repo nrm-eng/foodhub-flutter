@@ -18,8 +18,3 @@ final favoriteIdsProvider = StreamProvider<List<String>>((ref) {
   return ref.watch(favoriteRepositoryProvider).watchFavoriteIds(userId);
 });
 
-final isFavoriteProvider = FutureProvider.family<bool, String>((ref, mealId) async {
-  final userId = ref.watch(currentUserIdProvider);
-  if (userId == null) return false;
-  return ref.watch(favoriteRepositoryProvider).isFavorite(userId, mealId);
-});
