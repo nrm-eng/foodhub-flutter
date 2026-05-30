@@ -7,4 +7,5 @@ abstract class MealRepository {
   Future<List<MealPreview>> getMealsByCategory(String category);
   Future<Meal> getMealById(String id);
   Future<List<MealPreview>> searchMeals(String query);
+  Future<Meal> getRandomMeal();
 }

@@ -9,12 +9,10 @@ abstract final class ApiConstants {
       '$baseUrl/filter.php?c=$category';
 
   // Пошук за назвою
-  static String searchMeals(String query) =>
-      '$baseUrl/search.php?s=$query';
+  static String searchMeals(String query) => '$baseUrl/search.php?s=$query';
 
   // Деталі рецепту за ID
-  static String mealById(String id) =>
-      '$baseUrl/lookup.php?i=$id';
+  static String mealById(String id) => '$baseUrl/lookup.php?i=$id';
 
   // Випадковий рецепт
   static const String randomMeal = '$baseUrl/random.php';

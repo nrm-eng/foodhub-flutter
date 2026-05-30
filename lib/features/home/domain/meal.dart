@@ -41,12 +41,35 @@ class Meal {
       name: json['strMeal'] ?? '',
       category: json['strCategory'] ?? '',
       area: json['strArea'] ?? '',
-      instructions: (json['strInstructions'] ?? '').replaceAll('\r\n', '\n').replaceAll('\r', '\n').trim(),
+      instructions: (json['strInstructions'] ?? '')
+          .replaceAll('\r\n', '\n')
+          .replaceAll('\r', '\n')
+          .trim(),
       thumbnail: json['strMealThumb'] ?? '',
       tags: json['strTags'] ?? '',
       youtubeUrl: json['strYoutube'] ?? '',
       ingredients: ingredients,
       measures: measures,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> json = {
+      'idMeal': id,
+      'strMeal': name,
+      'strCategory': category,
+      'strArea': area,
+      'strInstructions': instructions,
+      'strMealThumb': thumbnail,
+      'strTags': tags,
+      'strYoutube': youtubeUrl,
+    };
+
+    for (int i = 0; i < ingredients.length; i++) {
+      json['strIngredient${i + 1}'] = ingredients[i];
+      json['strMeasure${i + 1}'] = measures.length > i ? measures[i] : '';
+    }
+
+    return json;
   }
 }

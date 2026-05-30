@@ -8,10 +8,7 @@ class LocalCache {
   static Future<void> saveCategories(String json) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_categoriesKey, json);
-    await prefs.setInt(
-      _cacheTimeKey,
-      DateTime.now().millisecondsSinceEpoch,
-    );
+    await prefs.setInt(_cacheTimeKey, DateTime.now().millisecondsSinceEpoch);
   }
 
   static Future<String?> getCategories() async {

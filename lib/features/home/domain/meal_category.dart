@@ -27,5 +27,5 @@ class MealCategory {
       'strCategoryThumb': thumbnail,
       'strCategoryDescription': description,
     };
- }
+  }
 }
